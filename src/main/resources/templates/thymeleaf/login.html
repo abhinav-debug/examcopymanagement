@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<title>IES ,IPS ACADEMY</title>
+	<link rel="stylesheet" href="/css/style.css" />
+	<link rel="icon" href="/images/logo.png" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+	<link rel="stylesheet" href="/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/css/all.min.css" />
+	<link rel="stylesheet" th:href="@{/css/all.css}" />
+	<link rel="stylesheet" href="/css/fontawesome.min.css" />
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" />
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<style>
+		.log {
+			width: 550px !important;
+			height: 600px !important;
+			background-color: #428bca !important;
+		}
+	
+	</style>
+
+</head>
+
+<body class="dark" >
+	<!-- HEADER FRAGEMENTS  -->
+	<div th:replace="/thymeleaf/components/header :: navbar"></div>
+	<!-- LOGIN FORM -->
+	<div class="container" id="logTheme">
+		<div class="d-flex justify-content-center" style="margin-top: 20px; margin-bottom: 10px">
+			<img th:src="@{/images/logo.png}" class="img-fluid center-block" width="100px" height="80px" alt="Logo" />
+		</div>
+		<form th:action="@{/loginPage}" method="POST" class="form-signin" id="myForm" style="display: block;">
+			<h3 class="form-signin-heading" th:text="Welcome"></h3>
+			<br />
+			<div class="d-flex">
+				<i class="fa fa-user prefix" style="font-size: 35px; margin-right: 10px !important;"
+					aria-hidden="true"></i><input type="text" id="user_name" name="user_name" placeholder="User Name"
+					class="form-control" />
+			</div>
+			<br />
+			<div class="d-flex">
+				<i class="fa fa-key prefix" style="font-size: 35px; margin-right: 10px !important;"
+					aria-hidden="true"></i> <input type="password" th:placeholder="Password" id="password"
+					name="password" class="form-control" />
+			</div>
+			<br />
+
+			<div align="center" th:if="${param.error}">
+				<p style="font-size: 20; color: #FF1C19;">User Name or Password
+					invalid, please verify</p>
+			</div>
+			<button class="btn btn-lg btn-primary btn-block" id="submit" name="Submit" style="display: none;"
+				value="Login" type="Submit" th:text="Login"></button>
+			<div class="float-right">
+				<a id="forgot" class="nav-link lead" style="color: red;" href="#">Forgot
+					Password?</a>
+			</div>
+		</form>
+		<form style="display: none;" id="myFormForgot" class="form-signin" action="/fogot" method="GET">
+			<div style="width: 100% !important;height: 20% !important; ">
+				<i class="fa fa-window-close prefix float-right" id="close" style="font-size: 20px; margin-right: 10px !important;"
+			aria-hidden="true"></i>
+			</div>
+			<h3 class="form-signin-heading" >Forgot Password !</h3>
+			
+
+			<label for="user_name">Enter Username.</label>
+			<input type="text" id="username" name="username" placeholder="User Name" class="form-control" />
+		
+			<span id="errorForgot" style="color: red;font-weight: 400;" ></span>
+			<br>
+			<br>
+			<button class="btn btn-lg btn-primary btn-block" id="forgotSubmit"
+				 type="Submit"> Change Password </button>
+		</form>
+
+		<form style="display: none;" id="myFormChange" class="form-signin" action="/changePass" method="GET">
+		
+			<span id="errorForgot" style="color: red;font-weight: 400;" ></span>
+			<br>
+			<br>
+			<button class="btn btn-lg btn-primary btn-block" id="forgotSubmit"
+				 type="Submit"> Change Password </button>
+		</form>
+
+
+	</div>
+	<script>
+		var btn = document.getElementById("submit");
+		var body = document.getElementsByTagName("body");
+		$(document).keydown(function (e) {
+			if (e.keyCode === 16) {
+				var dis = $(btn).css("display");
+				console.log(dis);
+				if (dis === "none") {
+					btn.style.display = "block";
+				} else {
+					btn.style.display = "none";
+				}
+
+			}
+
+		});
+
+		$('form input').keydown(function (e) {
+			if (e.keyCode === 13) {
+				var inputs = $(this).parents("form").eq(0).find(":input");
+				if (inputs[inputs.index(this) + 1] != null) {
+					inputs[inputs.index(this) + 1].focus();
+				}
+				e.preventDefault();
+				return false;
+			}
+		});
+
+		$(document).ready(function () {
+			var theme = $("#themeAll");
+			theme.on("click", function () {
+				if (theme.val() === "light") {
+					$(body).addClass("light");
+					$("#nav").addClass("navlight");
+					sessionStorage.setItem("themeAll", "light");
+					$("#logTheme").addClass("log")
+					$("#nav").removeClass("light");
+					console.log(sessionStorage.getItem("themeAll"));
+				} else if (theme.val() === "dark") {
+					$(body).removeClass("light");
+					$("#nav").removeClass("navlight");
+					$("#nav").addClass("light");
+					sessionStorage.setItem("themeAll", "dark");
+					$("#logTheme").removeClass("log")
+
+				}
+			})
+
+		});
+
+	$("#forgot").on("click", function (e) {
+		e.preventDefault();
+
+			$("#myForm").css("display","none");
+			$("#myFormForgot").css("display","block");
+
+	});
+
+	$("#close").on("click",function(){
+		$("#myForm").css("display","block");
+			$("#myFormForgot").css("display","none");
+	});
+
+	
+
+	$("#myFormForgot").on("submit",function(e){
+		e.preventDefault();
+		console.log("hey")
+		$.ajax({
+		type:"POST",
+			url:"http://localhost:8080/forgot",
+			data: {
+				username : $("#username").val()
+			},
+			success: function(response){
+
+				if(response == "true"){
+					
+				}else{
+					$("#errorForgot").html("User Doesn't Exists !")
+				}
+
+			
+			},
+			error: function(E){
+				console.log(E);
+			}
+		})
+	})
+
+
+	</script>
+
+	<div th:replace="/thymeleaf/components/header :: theme"></div>
+</body>
+
+</html>

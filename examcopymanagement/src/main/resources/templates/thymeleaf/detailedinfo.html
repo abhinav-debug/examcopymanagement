@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:spring="http://www.springframework.org/tags">
+
+<head>
+
+	<title>IES ,IPS ACADEMY</title>
+	<link rel="stylesheet" href="/css/style.css" />
+	<link rel="icon" href="/images/logo.png" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<style>
+		.bg {
+			background-color: #e6e6e6 !important;
+		}
+	</style>
+</head>
+
+<body class="dark" id="tablebg">
+	<!-- HEADER FRAGEMENTS  -->
+	<div th:replace="thymeleaf/components/header :: navbar"></div>
+
+	<!-- TABLE FORM -->
+
+
+
+	<div class="container-fluid" style="color: white;width: 90%;height: 60% !important">
+		<h1 class="display-4 fonts textTheme">Detailed Info</h1>
+
+
+		<form th:action="@{/home/updateDate}" method="POST">
+
+			<button type="submit" class="btn btn-primary" id="btn"
+				style="font-family: interstate; font-size: 20px; margin-bottom: 5px; border-radius: 20px">Save</button>
+			<p class="h5 float-right" style="color:green;">In order to change dates double-click on dates and rename
+				them !</p>
+
+
+			<div class="table-responsive">
+				<table class="table table-hover table-bordered bg-light lead fonts" id="pagination">
+					<thead class="thead-light lead fonts">
+						<tr>
+							<th scope="col" align="left"
+								style="color:black;font-family:interstate;font-weight: 500;font-size: 20px;">id</th>
+							<th scope="col" align="left"
+								style="color:black;font-family:interstate;font-weight: 500;font-size: 20px;">Enrollment
+								No.</th>
+							<th th:if="${date.foo}" scope="col" align="left"><input type="text" th:value="${date.foo}"
+									name="foo"
+									style="background: transparent; border: none; font-family: interstate; font-weight: 500; font-size: 20px;" />
+							</th>
+							<th th:if="${date.foo1}" scope="col" align="left"><input type="text" th:value="${date.foo1}"
+									name="foo1"
+									style="background: transparent; border: none; font-family: interstate; font-weight: 500; font-size: 20px;" />
+							</th>
+							<th th:if="${date.foo2}" scope="col" align="left"><input type="text" th:value="${date.foo2}"
+									name="foo2"
+									style="background: transparent; border: none; font-family: interstate; font-weight: 500; font-size: 20px;" />
+							</th>
+							<th th:if="${date.foo3}" scope="col" align="left"><input type="text" th:value="${date.foo3}"
+									name="foo3"
+									style="background: transparent; border: none; font-family: interstate; font-weight: 500; font-size: 20px;" />
+							</th>
+							<th th:if="${date.foo4}" scope="col" align="left"><input type="text" th:value="${date.foo4}"
+									name="foo4"
+									style="background: transparent; border: none; font-family: interstate; font-weight: 500; font-size: 20px;" />
+							</th>
+							<th th:if="${date.foo5}" scope="col" align="left"><input type="text" th:value="${date.foo5}"
+									name="foo5"
+									style="background: transparent; border: none; font-family: interstate; font-weight: 500; font-size: 20px;" />
+							</th>
+							<th th:if="${date.foo6}" scope="col" align="left"><input type="text" th:value="${date.foo6}"
+									name="foo6"
+									style="background: transparent; border: none; font-family: interstate; font-weight: 500; font-size: 20px;" />
+							</th>
+						</tr>
+					</thead>
+					<tbody th:each="detailed: ${detailed}" class="text-center">
+						<tr>
+							<td scope="row" th:if="${detailed.id}" th:text="${detailed.id}"></td>
+							<td scope="row" th:if="${detailed.enrollmentNo}" th:text="${detailed.enrollmentNo}"></td>
+							<td scope="row" th:if="${detailed.foo}" th:text="${detailed.foo}"></td>
+							<td scope="row" th:if="${detailed.foo1}" th:text="${detailed.foo1}"></td>
+							<td scope="row" th:if="${detailed.foo2}" th:text="${detailed.foo2}"></td>
+							<td scope="row" th:if="${detailed.foo3}" th:text="${detailed.foo3}"></td>
+							<td scope="row" th:if="${detailed.foo4}" th:text="${detailed.foo4}"></td>
+							<td scope="row" th:if="${detailed.foo5}" th:text="${detailed.foo5}"></td>
+							<td scope="row" th:if="${detailed.foo6}" th:text="${detailed.foo6}"></td>
+
+
+						</tr>
+					</tbody>
+					<tfoot class="thead-light lead fonts">
+						<tr>
+							<th scope="col" align="left"
+								style="color:black;font-family:interstate;font-weight: 500;font-size: 20px;">id</th>
+							<th scope="col" align="left"
+								style="color:black;font-family:interstate;font-weight: 500;font-size: 20px;">Enrollment
+								No.</th>
+							<th th:if="${date.foo}" scope="col" align="left"><input type="text" th:value="${date.foo}"
+									style="background: transparent; border: none; font-family: interstate; font-weight: 500; font-size: 20px;" />
+							</th>
+							<th th:if="${date.foo1}" scope="col" align="left"><input type="text" th:value="${date.foo1}"
+									style="background: transparent; border: none; font-family: interstate; font-weight: 500; font-size: 20px;" />
+							</th>
+							<th th:if="${date.foo2}" scope="col" align="left"><input type="text" th:value="${date.foo2}"
+									style="background: transparent; border: none; font-family: interstate; font-weight: 500; font-size: 20px;" />
+							</th>
+							<th th:if="${date.foo3}" scope="col" align="left"><input type="text" th:value="${date.foo3}"
+									style="background: transparent; border: none; font-family: interstate; font-weight: 500; font-size: 20px;" />
+							</th>
+							<th th:if="${date.foo4}" scope="col" align="left"><input type="text" th:value="${date.foo4}"
+									style="background: transparent; border: none; font-family: interstate; font-weight: 500; font-size: 20px;" />
+							</th>
+							<th th:if="${date.foo5}" scope="col" align="left"><input type="text" th:value="${date.foo5}"
+									style="background: transparent; border: none; font-family: interstate; font-weight: 500; font-size: 20px;" />
+							</th>
+							<th th:if="${date.foo6}" scope="col" align="left"><input type="text" th:value="${date.foo6}"
+									style="background: transparent; border: none; font-family: interstate; font-weight: 500; font-size: 20px;" />
+							</th>
+
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</form>
+	</div>
+
+
+	<!-- SCRIPTS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="
+    https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+	<script>
+		$(document).ready(function () {
+			function runIt() {
+				var $logo = $('#logo');
+				$logo.animate({
+					opacity: '1'
+				}, 1000);
+				$logo.animate({
+					opacity: '0.3'
+				}, 1000, runIt);
+			}
+			runIt();
+		});
+	</script>
+	<div th:replace="/thymeleaf/components/header :: theme"></div>
+
+</body>
+
+</html>

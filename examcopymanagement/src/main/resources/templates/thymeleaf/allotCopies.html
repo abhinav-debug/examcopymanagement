@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:spring="http://www.springframework.org/tags">
+
+<head>
+
+<title>IES ,IPS ACADEMY</title>
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="icon" href="/images/logo.png" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<style type="text/css">
+	#loader {
+	  display: none;
+	  position: fixed;
+	  top: 0;
+	  left: 0;
+	  right: 0;
+	  bottom: 0;
+	  width: 100%;
+	  background: rgba(0,0,0,0.5) url(../images/loading.gif) no-repeat center center ;
+	  background-size: 100px;
+	  z-index: 10000;
+	}
+	.bg{
+		background-color: #e6e6e6 !important;
+	}
+	</style>
+</head>
+
+
+<body class="dark" id="tablebg">
+	<!-- HEADER FRAGEMENTS  -->
+	<div th:replace="thymeleaf/components/header :: navbar"></div>
+
+	<!-- TABLE FORM -->
+
+
+	<div class="container-fluid" style="color: white;">
+		<h1 class="display-4 fonts textTheme">Allot Copies</h1>
+		<div class="float-right">
+			<input type="search" id="myInput" onkeyup="myFunction()"
+				placeholder="Search....">
+		</div>
+
+		<div th:if="${CopiesUnalloted}">
+			<p class="h5" style="color: red;">( You have Copies Unalloted .
+				Please reallot them from nav menu! )</p>
+		</div>
+
+		<div th:if="${NoRecord}">
+			<p class="h5" style="color: red;">No record Found !</p>
+		</div>
+		<div th:if="${NoRecord}">
+			<p class="h5" style="color: red;">Or possible not enough Copies
+				for Allotment!</p>
+		</div>
+		<div th:if="${param.noRecordSelected}">
+			<p class="h5" style="color: red;">No Copies Selected!</p>
+		</div>
+
+
+
+		<form th:action="@{/home/allotCopies}" method="POST" id="myForm"
+			th:object="${useLessModelList}">
+
+
+			<button type="submit" class="btn  btn-block allot btn-danger " disabled id="btn"
+				style="font-family: interstate; font-size: 20px; margin-bottom: 5px; border-radius: 20px ;color : black !important">Allot
+				Copies</button>
+			<br>
+			<div class="text-center d-flex justify-content-center">
+				<ul class="nav nav-pills">
+					<li class="nav-item "><a data-toggle="tab"
+						style="border-radius: 60%"
+						class="nav-link btn btn-outline-primary active" id="logout" href="#one">ONE</a></li>
+					<li style="padding: 20px"></li>
+					<li class="nav-item"><a data-toggle="tab"
+						style="border-radius: 60%"
+						class="nav-link btn btn-outline-primary" id="logout" href="#two">TWO</a></li>
+					<li style="padding: 20px"></li>
+
+					<li class="nav-item"><a data-toggle="tab"
+						style="border-radius: 60%"
+						class="nav-link btn btn-outline-primary" id="logout" href="#three">THREE</a></li>
+				</ul>
+			</div>
+			<br>
+
+			<div class="tab-content">
+				<!-- ONEEEEEEEEEEEEEEEEEEEEEEEE -->
+				<div id="one" class="tab-pane in active ">
+					<div th:replace="thymeleaf/components/ONE :: one(one=${one})"></div>
+
+				</div>
+				<!-- TWOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO -->
+				<div id="two" class="tab-pane fade">
+					<div th:replace="thymeleaf/components/TWO :: two(two=${two})"></div>
+
+				</div>
+				<!-- THREEEEEEEEEEEEEEEEEEEEEEEEEEEEE -->
+				<div id="three" class="tab-pane fade">
+					<div
+						th:replace="thymeleaf/components/THREE :: three(three=${three})"></div>
+
+				</div>
+			</div>
+
+
+		</form>
+		<div id="loader"></div>
+	</div>
+
+
+	<!-- SCRIPTS -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+	<script type="text/javascript"
+		src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#checkBoxAll").click(function() {
+				if ($(this).is(":checked"))
+					$(".chkCheckBoxAll").prop("checked", true);
+				else
+					$(".chkCheckBoxAll").prop("checked", false);
+			});
+
+		});
+
+		$("#checkBoxAll").click(function() {
+			if ($(this).is(":checked"))
+				$(".allot").attr("disabled", false);
+			else
+				$(".allot").attr("disabled", true);
+		});
+
+		function myFunction() {
+
+			var td, i, td1, td2;
+			var filter = document.getElementById("myInput").value.toUpperCase();
+
+			var table = document.getElementById("one");
+
+			var tr = table.getElementsByTagName("tr");
+
+			var table1 = document.getElementById("two");
+
+			var tr1 = table1.getElementsByTagName("tr");
+
+			var table2 = document.getElementById("three");
+
+			var tr2 = table2.getElementsByTagName("tr");
+
+			// Loop through all table rows, and hide those who don't match the search query
+			for (i = 1; i < tr.length - 1; i++) {
+				td = tr[i].cells[1].children[0].value;
+				td1 = tr1[i].cells[1].children[0].value;
+				td2 = tr2[i].cells[1].children[0].value;
+
+				if (td.includes(filter)) {
+					tr[i].style.display = "";
+
+				} else {
+					tr[i].style.display = "none";
+
+				}
+
+				if (td1.includes(filter)) {
+					tr1[i].style.display = "";
+				} else {
+					tr1[i].style.display = "none";
+				}
+
+				if (td2.includes(filter)) {
+					tr2[i].style.display = "";
+				} else {
+					tr2[i].style.display = "none";
+				}
+
+			}
+		}
+
+		$('#myForm').on("submit",function(e){
+			$('#loader').show();
+		
+    return true;
+		}
+
+		)
+
+$(document).ready(function () {
+	function runIt() {
+					var $logo = $('#logo');
+					$logo.animate({
+						opacity: '1'
+					}, 1000);
+					$logo.animate({
+						opacity: '0.3'
+					}, 1000, runIt);
+				}
+				runIt();
+});
+		
+	</script>
+	<div th:replace="/thymeleaf/components/header :: theme"></div>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:spring="http://www.springframework.org/tags">
+
+<head>
+
+<title>IES ,IPS ACADEMY</title>
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="icon" href="/images/logo.png" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+</head>
+
+<body style="background-color: #0d1b28">
+	<!-- HEADER FRAGEMENTS  -->
+	<div th:replace="components/header :: navbar"></div>
+
+	<!-- TABLE FORM -->
+
+	<h1 th:if="${request.getParameter(usernName)}" th:text="${userName}"
+		style="margin-top: 10px; margin-left: 20px; color: white;"></h1>
+
+	<div class="container-fluid" style="color: white;">
+		<h1 class="display-4">Allot Copies</h1>
+
+		<form  th:action="@{/home/allotCopies}" method="POST" modelAttribute="object">
+
+		 <button type="submit" class="btn btn-danger btn-block"
+				style="font-family: interstate; font-size: 20px; margin-bottom: 5px; border-radius: 20px">Allot
+				Copies</button> 
+
+			
+			<div class="table-responsive-lg">
+				<table class="table table-hover table-dark table-bordered "
+					id="pagination">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col"><input type="checkbox" id="checkBoxAll" /></th>
+							<th scope="col">Enrollment No.</th>
+							<th scope="col">Serial No.</th>
+							<th scope="col">Absent / Present</th>
+						</tr>
+					</thead>
+					<tbody
+						th:each="objectStudentSerials,taskStat : ${objectStudentSerials}">
+						<tr>
+							<td scope="row"><input type="checkbox"
+								class="chkCheckBoxAll"
+								value="${objectStudentSerials.enrollementNo}" name="id" /></td>
+							<td scope="row"><input
+								style="background-color: transparent !important;color:white; border: none !important;"
+								name="useLessModel[taskStat.index].enrollementNo"
+								th:value="${objectStudentSerials.enrollementNo}"></td>
+							<td scope="row"><input
+								style="background-color: transparent !important; color:white; border: none !important;"
+								name="useLessModel[taskStat.index].serialNo"
+								th:value="${objectStudentSerials.serialCopies}"></td>
+							<td scope="row"><div class="input-group mb-3">
+									<select class="custom-select" id="inputGroupSelect01"
+										name="useLessModel[taskStat.index].absentPresent">
+										<option selected th:value="true">Present</option>
+										<option th:value="false">Absent</option>
+									</select>
+								</div></td>
+						</tr>
+					</tbody>
+					<tfoot class="thead-light">
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Enrollment No.</th>
+							<th scope="col">Serial No.</th>
+							<th scope="col">Absent / Present</th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</form>
+	</div>
+
+
+	<!-- SCRIPTS -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script type="text/javascript"
+		src="
+    https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#pagination').DataTable({
+				"pagingType" : "simple"
+			});
+		});
+		$(document).ready(function() {
+			$("#checkBoxAll").click(function() {
+				if ($(this).is(":checked"))
+					$(".chkCheckBoxAll").prop("checked", true);
+				else
+					$(".chkCheckBoxAll").prop("checked", false);
+			});
+		});
+	</script>
+</body>
+</html>

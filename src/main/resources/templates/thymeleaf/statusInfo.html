@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:spring="http://www.springframework.org/tags">
+
+<head>
+
+<title>IES ,IPS ACADEMY</title>
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="icon" href="/images/logo.png" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+</head>
+
+<body class="dark">
+	<!-- HEADER FRAGEMENTS  -->
+	<div th:replace="thymeleaf/components/header :: navbar"></div>
+
+	<!-- TABLE FORM -->
+
+
+	<div class="container-fluid" style="color: white;">
+		<h1 class="display-4">Allotment Info</h1>
+
+
+
+		<div class="table-responsive-lg">
+			<table class="table table-hover table-dark table-bordered "
+				id="pagination">
+				<thead class="thead-light">
+					<tr>
+						<th scope="col">Id</th>
+						<th scope="col">Total Serial Copies Left</th>
+						<th scope="col">Total Copies Alloted</th>
+						<th scope="col">Total Copies UnAlloted</th>
+						<th scope="col">Total Missing Copies</th>
+						<th scope="col">Total UFM Copies</th>
+						<th scope="col">Date Time</th>
+
+					</tr>
+				</thead>
+				<tbody th:each="status : ${status}">
+					<tr>
+						<td scope="row"><input
+							style="background-color: transparent !important;width:100%; color: white; border: none !important;"
+							th:value="${status.id}" name="id" /></td>
+						<td scope="row"><input
+							style="background-color: transparent !important; color: white; border: none !important;"
+							name="Serial Copies" th:value="${status.totalSerialCopies}"></td>
+						<td scope="row"><input
+							style="background-color: transparent !important; color: white; border: none !important;"
+							name="Total Alloted" th:value="${status.totalAlloted}"></td>
+						<td scope="row"><input
+							style="background-color: transparent !important; color: white; border: none !important;"
+							name="Total Un Alloted" th:value="${status.totalUnAlloted}"></td>
+						<td scope="row"><input
+							style="background-color: transparent !important; color: white; border: none !important;"
+							name="Total Missin" th:value="${status.totalMissing}"></td>
+						<td scope="row"><input
+							style="background-color: transparent !important; color: white; border: none !important;"
+							name="Total UFM" th:value="${status.totalUFM}"></td>
+						<td class ="col-md-2"scope="row"><input
+							style="background-color: transparent !important; color: white; border: none !important;"
+							name="Date Time" th:value="${status.datetime}"></td>
+
+					</tr>
+				</tbody>
+				<tfoot class="thead-light">
+					<tr>
+						<th scope="col">Id</th>
+						<th scope="col">Total Serial Copies Left</th>
+						<th scope="col">Total Copies Alloted</th>
+						<th scope="col">Total Copies UnAlloted</th>
+						<th scope="col">Total UFM Copies</th>
+						<th scope="col">Total Missing Copies</th>
+						<th scope="col">Date Time</th>
+
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+
+	</div>
+
+
+	<!-- SCRIPTS -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script type="text/javascript"
+		src="
+    https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+		<script>
+			$(document).ready(function () {
+				function runIt() {
+					var $logo = $('#logo');
+					$logo.animate({
+						opacity: '1'
+					}, 1000);
+					$logo.animate({
+						opacity: '0.3'
+					}, 1000, runIt);
+				}
+				runIt();
+			});
+		</script>
+		<div th:replace="/thymeleaf/components/header :: theme"></div>
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+@charset "ISO-8859-1";
+
+@font-face {
+	font-family: "interstate";
+	src: url('fonts/interstate-regular.otf') format("otf");
+}
+
+.fonts {
+	font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;
+	font-weight: 100;
+	font-size: 20px;
+	color:black;
+}
+
+.dataTables_length {
+	font-family: interstate;
+}
+
+.dataTables_filter input {
+	font-family: interstate;
+	border: 2px solid black;
+	border-radius: 5px;
+}
+
+#pagination_previous {
+	font-family: interstate;
+	background-color: blue;
+	margin-right: 8px;
+	margin-top: 8px;
+	min-width: 96px;
+	border-radius: 10px; padding : 9px 23px;
+	border: 2px solid transparent;
+	background: #1a73e8;
+	font-weight: 500;
+	font-size: 14px;
+	padding: 9px 23px;
+}
+
+#pagination_paginate {
+	margin-top: 20px !important;
+	margin-bottom: 40px !important;
+}
+
+#pagination_next {
+	font-family: interstate;
+	background-color: blue;
+	margin-right: 8px;
+	margin-top: 8px;
+	min-width: 96px;
+	padding: 9px 23px;
+	border: 2px solid transparent;
+	background: #1a73e8;
+	font-weight: 500;
+	font-size: 14px;
+	margin-left: 20px;
+	border-radius: 10px;
+}
+
+.dataTable_info {
+	font-family: interstate;
+	color: #1a73e8;
+	font-weight: 500;
+	font-size: 14px;
+
+}
+.dropdown-toggle{ cursor:pointer;}
+
+.dropdown-menu{
+  position:fixed;
+}
+.table-responsive-xl{
+overflow-y:visible;
+overflow-x:visible;
+}
+
+.hell{
+	background:transparent !important;
+	border: none !important;
+	color:black;
+}
+th{
+	text-align: right;
+}
+
+#myInput{
+	margin-left:-60px;
+	width:130%;
+	height: 50px !important;
+	background: transparent;
+	border: 2px solid ;
+	border-color:#0044ff ;
+	border-radius:30px;
+	color:white !important;
+	font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;
+	font-weight: 100;
+	font-size: 20px;
+	margin-bottom: 20px;
+	margin-top: -30px;
+	
+}
+
+#myInput  ::-webkit-input-placeholder :-moz-placeholder ::-moz-placeholder {
+text-align: center !important;
+}
+
+.dark{
+	background-color: #0d1b28;
+}
+
+.light{
+	background-color:whitesmoke !important;
+}
+
+.navlight{
+	background-color: #428bca !important;
+}
+.fontLight{
+color: white !important;
+}
+ 

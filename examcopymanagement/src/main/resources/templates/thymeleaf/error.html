@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="ISO-8859-1" />
+<title>ERROR 404</title>
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="icon" href="/images/logo.png" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+</head>
+<body class="dark" style="color:white">
+
+<div th:replace="thymeleaf/components/header :: navbar"></div>
+
+
+	
+
+	<div class="container-fluid">
+	<div class="float-left" style="margin-top: 150px;" >
+	
+		<div class="container fonts "  >
+			<h1 class="display-1 fonts textTheme">404 - Error occurred</h1>
+			<p>An error has occurred. Please contact the administrator</p>
+		</div>
+
+	<form th:action="@{/loginPage}" method="get" sec:authorize="!isAuthenticated()" >
+		<button class="btn btn-md btn-outline-primary" type="Submit">Go
+			To Login Page</button>
+	</form>
+	<form th:action="@{/home}" method="get" sec:authorize="isAuthenticated()">
+		<button class="btn btn-md btn-outline-primary" type="Submit">Go
+			To Home Page</button>
+	</form>
+</div>
+</div>
+
+
+
+	<script>
+		$(document).ready(function () {
+			function runIt() {
+				var $logo = $('#logo');
+				$logo.animate({
+					opacity: '1'
+				}, 1000);
+				$logo.animate({
+					opacity: '0.3'
+				}, 1000, runIt);
+			}
+			runIt();
+		});
+	</script>
+	<div th:replace="/thymeleaf/components/header :: theme"></div>
+
+</body>
+</html>
